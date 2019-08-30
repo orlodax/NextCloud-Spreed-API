@@ -24,7 +24,7 @@
             }
         }
 
-        /* ESEMPIO DI RISPOSTA (oggetto Message in Chat)--------- 
+        /* RESPONSE SAMPLE ------------------------------------- 
         <element>
             <id>59</id>
             <token>upf7gnz6</token>
