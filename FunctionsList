@@ -1,0 +1,10 @@
+--USER--
+GetUsersInRoom
+--CHAT--
+GetChatsInRoom
+SendChat
+--ROOM--
+CreateRoom
+DeleteRoom
+GetRoomForCurrentUser
+GetRoomsForCurrentUser
