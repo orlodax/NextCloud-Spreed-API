@@ -35,7 +35,7 @@ namespace NextCloudAPI.Models
         public List<User> Participants { get; set; } = new List<User>();
 
 
-        /* ESEMPIO DI RISPOSTA (oggetto Room)--------- 
+        /* RESPONSE SAMPLE------------------------------- 
         <element>
             <id>3</id>
             <token>vassc49e</token>
