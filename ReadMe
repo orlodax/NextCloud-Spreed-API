@@ -1,0 +1,3 @@
+Set the Spreed server URL as BaseUrl inside Constants.cs 
+Initialize a User object in your project.
+Use the methods in ChatBL, RoomBL, UserBL. 
