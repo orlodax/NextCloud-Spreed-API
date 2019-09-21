@@ -8,3 +8,5 @@ CreateRoom
 DeleteRoom
 GetRoomForCurrentUser
 GetRoomsForCurrentUser
+--NOTIFIES--
+GetNotifies
