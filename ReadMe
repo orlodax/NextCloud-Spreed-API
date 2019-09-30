@@ -1,3 +1,7 @@
-Set the Spreed server URL as BaseUrl inside Constants.cs 
-Initialize a User object in your project.
-Use the methods in RequestsBL. 
+Set the Talk/Spreed server URL as BaseUrl inside Constants.cs 
+
+In your project: 
+construct RequestsBL with your User
+construct the others {model}BL.cs passing RequestsBL
+
+Use the model-associated methods inside {model}BL.cs 
