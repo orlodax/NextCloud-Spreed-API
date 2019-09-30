@@ -10,7 +10,7 @@
         public ulong lastPing { get; set; }                     // Timestamp of the last ping of the current user (should be used for sorting)
         public byte inCall { get; set; }                        // Is user in call
 
-        /* RESPONSE SAMPLE------------------------------------ 
+        /* ESEMPIO DI RISPOSTA (oggetto Participant)--------- 
         <?xml version="1.0"?>
             <ocs>
                 ...

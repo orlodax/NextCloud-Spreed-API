@@ -1,9 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
 
 namespace NextCloudAPI.Models
 {
     public class Room                                           // SEE https://nextcloud-talk.readthedocs.io/en/latest/conversation/
     {
+        private uint _unreadMessages;
+
         public uint id { get; set; }
         public string token { get; set; } = string.Empty;       // token identifier of the conversation which is used for further interaction
         public uint type { get; set; }
@@ -21,21 +24,32 @@ namespace NextCloudAPI.Models
         public ulong lastActivity { get; set; }                 // Timestamp of the last activity in the conversation, in seconds and UTC time zone
         public bool? isFavorite { get; set; }                   // Flag if the conversation is favorited by the user
         public byte notificationLevel { get; set; }             // The notification level for the user (one of Participant::NOTIFY_* (1-3))
-        public uint unreadMessages { get; set; }                // Number of unread chat messages in the conversation (only available with chat-v2 capability)
+        public uint unreadMessages { get => _unreadMessages;    // Number of unread chat messages in the conversation (only available with chat-v2 capability)
+            set {
+                _unreadMessages = value;
+                if (value > 0)
+                    HasUnreadMessages = true;
+            }
+        }                
         public bool? unreadMention { get; set; }                // Flag if the user was mentioned since their last visit
         public uint lastReadMessage { get; set; }               // ID of the last read message in a room
         public Chat lastMessage { get; set; } = new Chat();     // Last message in a conversation if available, otherwise empty
         public string objectType { get; set; } = string.Empty;  // The type of object that the conversation is associated with; "share:password" if the conversation is used to request a password for a share, otherwise empty
         public string objectId { get; set; } = string.Empty;    // Share token if "objectType" is "share:password", otherwise empty
-        
+
         public object participants { get; set; }                // fake object to hold serialization spam
 
         //to hold participant: NOTE --- api won't respond consistently so deserializing does not work (requires to much extra work to map different jsonattributes)
         //please use GetUsersInRoom(Room Room) in UserBL.cs to populate this
         public List<User> Participants { get; set; } = new List<User>();
 
+        #region UI MEMBERS
+        ///     UI MEMBERS, POPULATED BY DATA CLASS     ///
+        public Bitmap Avatar { get; set; }
+        public bool HasUnreadMessages { get; set; } = false;
+        #endregion
 
-        /* RESPONSE SAMPLE------------------------------- 
+        /* ESEMPIO DI RISPOSTA (oggetto Room)--------- 
         <element>
             <id>3</id>
             <token>vassc49e</token>

@@ -2,9 +2,15 @@
 {
     public static class Constants
     {
-        public const string BaseUrl = "www.vegastorage.com";
-        public const string EndPoint = "/ocs/v2.php/apps/spreed/api/v1";
-        public const string NotificationsEndPoint = "/ocs/v2.php/apps/notifications/api/v2";
+        internal const string BaseUrl = "www.vegastorage.com";
+        internal const string BaseEndPoint = "/ocs/v2.php/apps/spreed/api/v1";
+        internal const string NotificationsEndPoint = "/ocs/v2.php/apps/notifications/api/v2";
+        internal const string ContactsEndPoint = "/ocs/v2.php/core/autocomplete";
+        internal const string AvatarEndPoint = "/index.php/avatar";
+
+        internal const string BaseRequestStub = "https://" + BaseUrl + BaseEndPoint;
+        internal const string ContactsRequestStub = "https://" + BaseUrl + ContactsEndPoint;
+        internal const string AvatarRequestStub = "https://" + BaseUrl + AvatarEndPoint;
 
         public enum ConversationTypes
         {
