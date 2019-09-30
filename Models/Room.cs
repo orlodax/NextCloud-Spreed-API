@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 
 namespace NextCloudAPI.Models
@@ -6,6 +7,8 @@ namespace NextCloudAPI.Models
     public class Room                                           // SEE https://nextcloud-talk.readthedocs.io/en/latest/conversation/
     {
         private uint _unreadMessages;
+        private ulong? _lastActivity;
+        private ulong? _lastPing;
 
         public uint id { get; set; }
         public string token { get; set; } = string.Empty;       // token identifier of the conversation which is used for further interaction
@@ -17,20 +20,23 @@ namespace NextCloudAPI.Models
         public byte readOnly { get; set; }                      // Either 0 or 1
         public ushort count { get; set; }                       // Number of active users
         public ushort numGuests { get; set; }                   // Number of active guests
-        public ulong lastPing { get; set; }                     // Timestamp of the last ping of the current user (should be used for sorting)
+        public ulong? lastPing { get => _lastPing; set { _lastPing = value; SetUltimaAttivita(); } }                 // Timestamp of the last ping of the current user (should be used for sorting)
         public string sessionId { get; set; }                   // '0' if not connected, otherwise a 512 character long string
         public bool? hasPassword { get; set; }                  // Flag if the conversation has a password
         public bool? hasCall { get; set; }                      // Flag if the conversation has an active call
-        public ulong lastActivity { get; set; }                 // Timestamp of the last activity in the conversation, in seconds and UTC time zone
+        public ulong? lastActivity { get => _lastActivity; set { _lastActivity = value; SetUltimoMessaggio(); } }                // Timestamp of the last activity in the conversation, in seconds and UTC time zone
         public bool? isFavorite { get; set; }                   // Flag if the conversation is favorited by the user
         public byte notificationLevel { get; set; }             // The notification level for the user (one of Participant::NOTIFY_* (1-3))
-        public uint unreadMessages { get => _unreadMessages;    // Number of unread chat messages in the conversation (only available with chat-v2 capability)
-            set {
+        public uint unreadMessages
+        {
+            get => _unreadMessages;    // Number of unread chat messages in the conversation (only available with chat-v2 capability)
+            set
+            {
                 _unreadMessages = value;
                 if (value > 0)
                     HasUnreadMessages = true;
             }
-        }                
+        }
         public bool? unreadMention { get; set; }                // Flag if the user was mentioned since their last visit
         public uint lastReadMessage { get; set; }               // ID of the last read message in a room
         public Chat lastMessage { get; set; } = new Chat();     // Last message in a conversation if available, otherwise empty
@@ -47,6 +53,31 @@ namespace NextCloudAPI.Models
         ///     UI MEMBERS, POPULATED BY DATA CLASS     ///
         public Bitmap Avatar { get; set; }
         public bool HasUnreadMessages { get; set; } = false;
+
+        public string UltimoMessaggio { get; set; } = string.Empty;
+        public string UltimaAttivita { get; set; } = string.Empty;
+
+        private void SetUltimaAttivita()
+        {
+            if (lastPing.HasValue)
+                if (lastPing > 0)
+                {
+                    DateTime start = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+                    DateTime date = start.AddSeconds(Convert.ToInt64(lastPing)).ToLocalTime();
+                    UltimaAttivita = "Ultima attività: " + date.ToShortDateString() + " " + date.ToShortTimeString();
+                }
+        }
+
+        private void SetUltimoMessaggio()
+        {
+            if (lastActivity.HasValue)
+                if (lastActivity > 0)
+                {
+                    DateTime start = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc);
+                    DateTime date = start.AddSeconds(Convert.ToInt64(lastActivity)).ToLocalTime();
+                    UltimoMessaggio = date.ToShortDateString() + " " + date.ToShortTimeString();
+                }
+        }
         #endregion
 
         /* ESEMPIO DI RISPOSTA (oggetto Room)--------- 

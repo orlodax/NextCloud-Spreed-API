@@ -27,7 +27,8 @@ namespace NextCloudAPI.Requests
                 ("/chat/{0}?lastKnownMessageId=0&limit=100&lookIntoFuture=1", Room.token), Constants.BaseRequestStub);
 
             if (response != null)
-                chats = RequestsBL.DeserializeObjects<Chat>(XDocument.Parse(await response.Content.ReadAsStringAsync()), elementPointer);
+                if (response.IsSuccessStatusCode)
+                    chats = RequestsBL.DeserializeObjects<Chat>(XDocument.Parse(await response.Content.ReadAsStringAsync()), elementPointer);
 
             return chats;
         }
@@ -42,7 +43,8 @@ namespace NextCloudAPI.Requests
                 ("/chat/{0}", Room.token), jContent, Constants.BaseRequestStub);
 
             if (response != null)
-                chat = RequestsBL.DeserializeObjects<Chat>(XDocument.Parse(await response.Content.ReadAsStringAsync()), dataPointer)[0];
+                if (response.IsSuccessStatusCode)
+                    chat = RequestsBL.DeserializeObjects<Chat>(XDocument.Parse(await response.Content.ReadAsStringAsync()), dataPointer)[0];
 
             return chat;
         }

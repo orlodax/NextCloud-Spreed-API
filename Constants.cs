@@ -7,10 +7,12 @@
         internal const string NotificationsEndPoint = "/ocs/v2.php/apps/notifications/api/v2";
         internal const string ContactsEndPoint = "/ocs/v2.php/core/autocomplete";
         internal const string AvatarEndPoint = "/index.php/avatar";
+        internal const string UsersEndPoint = "/ocs/v2.php/cloud/users";
 
         internal const string BaseRequestStub = "https://" + BaseUrl + BaseEndPoint;
         internal const string ContactsRequestStub = "https://" + BaseUrl + ContactsEndPoint;
         internal const string AvatarRequestStub = "https://" + BaseUrl + AvatarEndPoint;
+        internal const string UsersRequestStub = "https://" + BaseUrl + UsersEndPoint;
 
         public enum ConversationTypes
         {

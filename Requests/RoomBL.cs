@@ -29,7 +29,8 @@ namespace NextCloudAPI.Requests
             HttpResponseMessage response = await RequestsBL.GETRequest("/room", Constants.BaseRequestStub);
 
             if (response != null)
-                rooms = RequestsBL.DeserializeObjects<Room>(XDocument.Parse(await response.Content.ReadAsStringAsync()), elementPointer);
+                if (response.IsSuccessStatusCode)
+                    rooms = RequestsBL.DeserializeObjects<Room>(XDocument.Parse(await response.Content.ReadAsStringAsync()), elementPointer);
 
             return rooms;
         }
@@ -40,7 +41,8 @@ namespace NextCloudAPI.Requests
             HttpResponseMessage response = await RequestsBL.GETRequest(String.Format("/room/{0}", Room.token), Constants.BaseRequestStub);
 
             if (response != null)
-                room = RequestsBL.DeserializeObjects<Room>(XDocument.Parse(await response.Content.ReadAsStringAsync()), elementPointer)[0];
+                if (response.IsSuccessStatusCode)
+                    room = RequestsBL.DeserializeObjects<Room>(XDocument.Parse(await response.Content.ReadAsStringAsync()), elementPointer)[0];
 
             return room;
         }
@@ -85,7 +87,10 @@ namespace NextCloudAPI.Requests
             HttpResponseMessage response = await RequestsBL.DELETERequest(string.Format("/room/{0}/participants/self", Room.token), Constants.BaseRequestStub);
 
             if (response != null)
-                return RequestsBL.DeserializeResponse(XDocument.Parse(await response.Content.ReadAsStringAsync()), ocsPointer);
+                if (response.IsSuccessStatusCode)
+                    return RequestsBL.DeserializeResponse(XDocument.Parse(await response.Content.ReadAsStringAsync()), ocsPointer);
+                else
+                    return null;
             else
                 return null;
         }

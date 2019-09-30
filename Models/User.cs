@@ -1,4 +1,6 @@
-﻿namespace NextCloudAPI.Models
+﻿using System.Drawing;
+
+namespace NextCloudAPI.Models
 {
     public class User                                           // SEE https://nextcloud-talk.readthedocs.io/en/latest/participant/
     {
@@ -9,6 +11,10 @@
         public byte participantType { get; set; }               // Permissions level of the current user - SEE Constants.cs
         public ulong lastPing { get; set; }                     // Timestamp of the last ping of the current user (should be used for sorting)
         public byte inCall { get; set; }                        // Is user in call
+
+
+        ///UI
+        public Bitmap Avatar { get; set; }
 
         /* ESEMPIO DI RISPOSTA (oggetto Participant)--------- 
         <?xml version="1.0"?>

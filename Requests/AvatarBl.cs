@@ -1,9 +1,4 @@
-﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using NextCloudAPI.Models;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using System.Drawing;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -24,7 +19,8 @@ namespace NextCloudAPI.Requests
             HttpResponseMessage response = await RequestsBL.GETRequest(string.Format("/{0}/{1}", username, pixelDesired), Constants.AvatarRequestStub);
 
             if (response != null)
-                avatar = new Bitmap(await response.Content.ReadAsStreamAsync());
+                if (response.IsSuccessStatusCode)
+                    avatar = new Bitmap(await response.Content.ReadAsStreamAsync());
 
             return avatar;
         }

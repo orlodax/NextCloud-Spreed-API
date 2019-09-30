@@ -4,7 +4,6 @@ using Newtonsoft.Json.Linq;
 using NextCloudAPI.Models;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -57,7 +56,7 @@ namespace NextCloudAPI.Requests
         {
             string jResponse = JsonConvert.SerializeXNode(xResponse);
             JToken documentToken = JToken.Parse(jResponse);
-            JToken genericToken = chosenPointer.Evaluate(jResponse);
+            JToken genericToken = chosenPointer.Evaluate(documentToken);
 
             return (JObject)JsonConvert.DeserializeObject(genericToken.ToString());
         }
