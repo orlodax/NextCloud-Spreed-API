@@ -2,7 +2,7 @@
 {
     public static class Constants
     {
-        internal const string BaseUrl = "www.vegastorage.com";
+        internal const string BaseUrl = "yourNextCloud.url";
         internal const string BaseEndPoint = "/ocs/v2.php/apps/spreed/api/v1";
         internal const string NotificationsEndPoint = "/ocs/v2.php/apps/notifications/api/v2";
         internal const string ContactsEndPoint = "/ocs/v2.php/core/autocomplete";
