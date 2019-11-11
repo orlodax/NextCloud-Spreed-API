@@ -4,7 +4,6 @@ using Newtonsoft.Json.Linq;
 using NextCloudAPI.Models;
 using System;
 using System.Collections.Generic;
-using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -17,9 +16,9 @@ namespace NextCloudAPI.Requests
     {
         #region PROPERTIES
 
-        private User User;
+        internal User User;
         private string AuthorizationHeader;
-        private HttpClient HttpClient = new HttpClient();
+        internal HttpClient HttpClient = new HttpClient();
 
         #endregion
 
@@ -29,6 +28,16 @@ namespace NextCloudAPI.Requests
             User = user;
 
             AuthorizationHeader = Convert.ToBase64String(Encoding.Default.GetBytes(String.Format("{0}:{1}", User.userId, User.password)));
+
+            AddHeaders();
+        }
+        void AddHeaders()
+        {
+            HttpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*"));
+            HttpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Basic", AuthorizationHeader);
+            HttpClient.DefaultRequestHeaders.Connection.Add("keep-alive");
+            HttpClient.DefaultRequestHeaders.TryAddWithoutValidation("Accept-Encoding", "gzip,deflate");
+            HttpClient.DefaultRequestHeaders.TryAddWithoutValidation("OCS-APIRequest", "true");
         }
         #endregion
 
@@ -67,28 +76,25 @@ namespace NextCloudAPI.Requests
         public async Task<HttpResponseMessage> GETRequest(string queryEndpoint, string chosenRequestStub)
         {
             var req = new HttpRequestMessage(HttpMethod.Get, new Uri(chosenRequestStub + queryEndpoint));
-            req = AddHeaders(req);
 
             var response = await HttpClient.SendAsync(req);
 
             return await Respond(response);
         }
-
         public async Task<HttpResponseMessage> POSTRequest(string queryEndpoint, string jContent, string chosenRequestStub)
         {
             var req = new HttpRequestMessage(HttpMethod.Post, new Uri(chosenRequestStub + queryEndpoint));
-            req = AddHeaders(req);
 
             req.Content = new StringContent(jContent, Encoding.UTF8, "application/json");
-
+            
             var response = await HttpClient.SendAsync(req);
 
             return await Respond(response);
         }
+
         public async Task<HttpResponseMessage> DELETERequest(string queryEndpoint, string chosenRequestStub)
         {
             var req = new HttpRequestMessage(HttpMethod.Delete, new Uri(chosenRequestStub + queryEndpoint));
-            req = AddHeaders(req);
 
             var response = await HttpClient.SendAsync(req);
 
@@ -97,17 +103,6 @@ namespace NextCloudAPI.Requests
         #endregion
 
         #region Common Methods for all requests
-        HttpRequestMessage AddHeaders(HttpRequestMessage req)
-        {
-            req.Version = HttpVersion.Version11;
-            req.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("*/*"));
-            req.Headers.Authorization = new AuthenticationHeaderValue("Basic", AuthorizationHeader);
-            req.Headers.Connection.Add("keep-alive");
-            req.Headers.Add("Accept-Encoding", "gzip,deflate");
-            req.Headers.TryAddWithoutValidation("OCS-APIRequest", "true");
-
-            return req;
-        }
         async Task<string> RequestError(HttpResponseMessage response)
         {
             string str = string.Empty;

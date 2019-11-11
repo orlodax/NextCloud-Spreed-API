@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29503.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NextCloudAPI", "NextCloudAPI.csproj", "{DD4375A4-4203-42F6-A482-575DB62505CD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DD4375A4-4203-42F6-A482-575DB62505CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD4375A4-4203-42F6-A482-575DB62505CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DD4375A4-4203-42F6-A482-575DB62505CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DD4375A4-4203-42F6-A482-575DB62505CD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {570CC126-89C3-4E3F-A5B8-E7D20C42D33C}
+	EndGlobalSection
+EndGlobal

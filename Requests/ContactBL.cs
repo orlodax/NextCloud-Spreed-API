@@ -25,7 +25,7 @@ namespace NextCloudAPI.Requests
 
             if (response != null)
             {
-                JObject jResponse = (JObject)JsonConvert.DeserializeObject(await response.Content.ReadAsStringAsync());     //sto infame era già un json e non un xml
+                JObject jResponse = (JObject)JsonConvert.DeserializeObject(await response.Content.ReadAsStringAsync());     //sto coso era già un json e non un xml
                 var contactsContainer = jResponse["ocs"]["data"].AsJEnumerable();                                           //non si sa perché il pointer non funziona, seleziono path a mano
 
                 if (contactsContainer != null)                                                                              //gli oggetti che trova finalmente li serializza
