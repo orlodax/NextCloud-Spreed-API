@@ -21,7 +21,7 @@ namespace NextCloudAPI.Requests
             List<Contact> contacts = new List<Contact>();
 
             HttpResponseMessage response = await RequestsBL.GETRequest
-                (String.Format("/get?format=json&search={0}&itemType=call&itemId=new&shareTypes%5B%5D=0&shareTypes%5B%5D=1", searchText), Constants.ContactsRequestStub);
+                (String.Format("/get?format=json&search={0}&itemType=call&itemId=new&shareTypes%5B%5D=0&shareTypes%5B%5D=1", searchText), RequestsBL.Constants.ContactsRequestStub);
 
             if (response != null)
             {

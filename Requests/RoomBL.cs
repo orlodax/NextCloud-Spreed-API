@@ -26,7 +26,7 @@ namespace NextCloudAPI.Requests
         {
             List<Room> rooms = new List<Room>();
 
-            HttpResponseMessage response = await RequestsBL.GETRequest("/room", Constants.BaseRequestStub);
+            HttpResponseMessage response = await RequestsBL.GETRequest("/room", RequestsBL.Constants.BaseRequestStub);
 
             if (response != null)
                 if (response.IsSuccessStatusCode)
@@ -38,7 +38,7 @@ namespace NextCloudAPI.Requests
         {
             Room room = new Room();
 
-            HttpResponseMessage response = await RequestsBL.GETRequest(String.Format("/room/{0}", Room.token), Constants.BaseRequestStub);
+            HttpResponseMessage response = await RequestsBL.GETRequest(String.Format("/room/{0}", Room.token), RequestsBL.Constants.BaseRequestStub);
 
             if (response != null)
                 if (response.IsSuccessStatusCode)
@@ -65,7 +65,7 @@ namespace NextCloudAPI.Requests
 
             var jContent = JsonConvert.SerializeObject(nc);
 
-            HttpResponseMessage response = await RequestsBL.POSTRequest("/room", jContent, Constants.BaseRequestStub);
+            HttpResponseMessage response = await RequestsBL.POSTRequest("/room", jContent, RequestsBL.Constants.BaseRequestStub);
 
             if (response != null)
             {
@@ -84,7 +84,7 @@ namespace NextCloudAPI.Requests
         }
         public async Task<JObject> DeleteRoom(Room Room)
         {
-            HttpResponseMessage response = await RequestsBL.DELETERequest(string.Format("/room/{0}/participants/self", Room.token), Constants.BaseRequestStub);
+            HttpResponseMessage response = await RequestsBL.DELETERequest(string.Format("/room/{0}/participants/self", Room.token), RequestsBL.Constants.BaseRequestStub);
 
             if (response != null)
                 if (response.IsSuccessStatusCode)

@@ -1,18 +1,28 @@
 ﻿namespace NextCloudAPI
 {
-    public static class Constants
+    public class Constants
     {
-        internal const string BaseUrl = "WWW.InputYourNextCloud.URL";
-        internal const string BaseEndPoint = "/ocs/v2.php/apps/spreed/api/v1";
-        internal const string NotificationsEndPoint = "/ocs/v2.php/apps/notifications/api/v2";
-        internal const string ContactsEndPoint = "/ocs/v2.php/core/autocomplete";
-        internal const string AvatarEndPoint = "/index.php/avatar";
-        internal const string UsersEndPoint = "/ocs/v2.php/cloud/users";
+        internal string BaseUrl = "WWW.InputYourNextCloud.URL";
+        internal string BaseEndPoint = "/ocs/v2.php/apps/spreed/api/v1";
+        internal string NotificationsEndPoint = "/ocs/v2.php/apps/notifications/api/v2";
+        internal string ContactsEndPoint = "/ocs/v2.php/core/autocomplete";
+        internal string AvatarEndPoint = "/index.php/avatar";
+        internal string UsersEndPoint = "/ocs/v2.php/cloud/users";
 
-        internal const string BaseRequestStub = "https://" + BaseUrl + BaseEndPoint;
-        internal const string ContactsRequestStub = "https://" + BaseUrl + ContactsEndPoint;
-        internal const string AvatarRequestStub = "https://" + BaseUrl + AvatarEndPoint;
-        internal const string UsersRequestStub = "https://" + BaseUrl + UsersEndPoint;
+        internal string BaseRequestStub { get; }
+        internal string ContactsRequestStub { get; }
+        internal string AvatarRequestStub { get; }
+        internal string UsersRequestStub { get; }
+
+        public Constants(string url)
+        {
+            BaseUrl = url;
+
+            BaseRequestStub = "https://" + BaseUrl + BaseEndPoint;
+            ContactsRequestStub = "https://" + BaseUrl + ContactsEndPoint;
+            AvatarRequestStub = "https://" + BaseUrl + AvatarEndPoint;
+            UsersRequestStub = "https://" + BaseUrl + UsersEndPoint;
+        }
 
         public enum ConversationTypes
         {

@@ -19,13 +19,15 @@ namespace NextCloudAPI.Requests
         internal User User;
         private string AuthorizationHeader;
         internal HttpClient HttpClient = new HttpClient();
+        internal Constants Constants;
 
         #endregion
 
         #region CONSTRUCTOR
-        public RequestsBL(User user)
+        public RequestsBL(User user, string url)
         {
             User = user;
+            Constants = new Constants(url);
 
             AuthorizationHeader = Convert.ToBase64String(Encoding.Default.GetBytes(String.Format("{0}:{1}", User.userId, User.password)));
 

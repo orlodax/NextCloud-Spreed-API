@@ -20,7 +20,7 @@ namespace NextCloudAPI.Requests
         }
         public async Task<UserInfo> GetUserInfo(string userId)
         {
-            HttpResponseMessage response = await RequestsBL.GETRequest(string.Format("/{0}", userId), Constants.UsersRequestStub);
+            HttpResponseMessage response = await RequestsBL.GETRequest(string.Format("/{0}", userId), RequestsBL.Constants.UsersRequestStub);
 
            UserInfo ui = new UserInfo();
 

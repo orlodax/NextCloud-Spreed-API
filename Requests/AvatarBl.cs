@@ -16,7 +16,7 @@ namespace NextCloudAPI.Requests
         {
             Bitmap avatar = null;
 
-            HttpResponseMessage response = await RequestsBL.GETRequest(string.Format("/{0}/{1}", username, pixelDesired), Constants.AvatarRequestStub);
+            HttpResponseMessage response = await RequestsBL.GETRequest(string.Format("/{0}/{1}", username, pixelDesired), RequestsBL.Constants.AvatarRequestStub);
 
             if (response != null)
                 if (response.IsSuccessStatusCode)
@@ -28,7 +28,7 @@ namespace NextCloudAPI.Requests
         {
             Bitmap avatar = null;
 
-            HttpResponseMessage response = await RequestsBL.GETRequest(string.Format("/{0}/{1}", RequestsBL.User.userId, 400), Constants.AvatarRequestStub);
+            HttpResponseMessage response = await RequestsBL.GETRequest(string.Format("/{0}/{1}", RequestsBL.User.userId, 400), RequestsBL.Constants.AvatarRequestStub);
 
             if (response != null)
                 if (response.IsSuccessStatusCode)
@@ -40,7 +40,7 @@ namespace NextCloudAPI.Requests
         {
             Bitmap avatar = null;
 
-            HttpResponseMessage response = await RequestsBL.DELETERequest(string.Empty, Constants.AvatarRequestStub);
+            HttpResponseMessage response = await RequestsBL.DELETERequest(string.Empty, RequestsBL.Constants.AvatarRequestStub);
 
             //after deleting, reloads the default image for this user
             if (response != null)

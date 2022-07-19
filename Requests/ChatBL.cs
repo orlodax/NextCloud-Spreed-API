@@ -24,7 +24,7 @@ namespace NextCloudAPI.Requests
             List<Chat> chats = new List<Chat>();
 
             HttpResponseMessage response = await RequestsBL.GETRequest(string.Format
-                ("/chat/{0}?lastKnownMessageId=0&limit=100&lookIntoFuture=1", Room.token), Constants.BaseRequestStub);
+                ("/chat/{0}?lastKnownMessageId=0&limit=100&lookIntoFuture=1", Room.token), RequestsBL.Constants.BaseRequestStub);
 
             if (response != null)
                 if (response.IsSuccessStatusCode)
@@ -40,7 +40,7 @@ namespace NextCloudAPI.Requests
             var jContent = JsonConvert.SerializeObject(Chat);
 
             HttpResponseMessage response = await RequestsBL.POSTRequest(string.Format
-                ("/chat/{0}", Room.token), jContent, Constants.BaseRequestStub);
+                ("/chat/{0}", Room.token), jContent, RequestsBL.Constants.BaseRequestStub);
 
             if (response != null)
                 if (response.IsSuccessStatusCode)
