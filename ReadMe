@@ -5,3 +5,5 @@ construct RequestsBL with your User
 construct the others {model}BL.cs passing RequestsBL
 
 Use the model-associated methods inside {model}BL.cs 
+
+For an implementation sample, see https://github.com/orlodax/ChatOnNextCloudTalk
